@@ -35,7 +35,6 @@ async function handleLogin(req: Request, res: Response) {
 
   try {
     const loggedIn: IUserModel = await login(credentials);
-
     res.status(200).json({
       message: "User logged in successfully",
       user: {

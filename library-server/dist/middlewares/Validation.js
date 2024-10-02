@@ -22,7 +22,7 @@ function ValidateSchema(schema) {
             next();
         }
         catch (error) {
-            res.status(422).json({ message: "Object validation failed, please include a valid object" });
+            return res.status(422).json({ message: "Object validation failed, please include a valid object" });
         }
     });
 }
@@ -34,10 +34,6 @@ exports.Schemas = {
             lastName: joi_1.default.string().required(),
             email: joi_1.default.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).required(),
             password: joi_1.default.string().required(),
-        }),
-        login: joi_1.default.object({
-            email: joi_1.default.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).required(),
-            password: joi_1.default.string().required()
         })
     }
 };
