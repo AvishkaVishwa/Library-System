@@ -1,12 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef , useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../../redux/ReduxStore';
+import { AppDispatch, RootState } from '../../../../redux/reduxStore';
 import { loginuser } from '../../../../redux/Slices/AuthenticationSlices';
 
 import './LoginForm.css';
 
-
-export const LoginForm: React.FC = () => {
+interface LoginFormProps {
+  toggleRegister: () => void;
+}
+export const LoginForm: React.FC<LoginFormProps> = ({ toggleRegister }) => {
 
   
     const emailRef = useRef<HTMLInputElement>(null);
@@ -19,12 +21,11 @@ export const LoginForm: React.FC = () => {
       e.preventDefault();
       if(emailRef && emailRef.current && passwordRef && passwordRef.current){
         dispatch(loginuser({
-          email: emailRef.current.value,
+          email: emailRef.current.value, 
           password: passwordRef.current.value
-        }))
+        }));
       }
-    };
-  
+    }
     return (
       <form className="login-form">
         <h2>Please Login</h2>
@@ -55,7 +56,7 @@ export const LoginForm: React.FC = () => {
         </button>
         <p>
           Don't have an account?{' '}
-          <span className="login-form-register">Create one here.</span>
+          <span className="login-form-register" onClick= {toggleRegister}>Create one here.</span>
         </p>
       </form>
     );

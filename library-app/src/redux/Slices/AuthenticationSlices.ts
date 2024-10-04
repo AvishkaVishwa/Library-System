@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction  } from '@reduxjs/toolkit';
 import { loginUserPayload, User } from '../../models/User';
 
 import axios from 'axios';
@@ -21,7 +21,7 @@ export const loginuser = createAsyncThunk(
     'authe/login',
     async (user:loginUserPayload , thunkAPI) => {
         try {
-            const req = await axios.post('http://localhost:8000/auth/register', user);
+            const req = await axios.post('http://localhost:8000/auth/login', user);
             return req.data.user;
         } catch (error) {
             return thunkAPI.rejectWithValue(error);

@@ -1,237 +1,113 @@
-/* Header Styles */
-header {
-  position: relative;
-  top: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  padding: 10px 100px;
-  background: #edecea;
-  animation: fadeInDown 1s ease-in-out;
-  flex-wrap: wrap;
+/* Google Font link: https://fonts.google.com/specimen/Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --background-primary: #eef0f2;
+  --background-secondary: #f3f3f3;
+  --text: #1c120c;
+  --text-secondary: #a7a978;
+  --primary: #3626a7;
+  --secondary: #e0ab76;
+  --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-/* Navbar Styles */
-.navbar {
-  display: flex;
-  gap: 1rem;
-  padding: 10px;
-  flex-wrap: wrap;
-}
-
-  .navbar a {
-      color: #000000;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      align-self: right;
-  }
-
-      .navbar a:hover {
-          background-color: #e99ad0;
-      }
-
-/* Home Section Styles */
-.home {
+html, body, #root {
   width: 100%;
-  min-height: 80vh;
-  background-image: url(https://media.istockphoto.com/id/910852368/photo/student-searching-books.jpg?s=612x612&w=0&k=20&c=mwhm2PRXrVPoCjBUcNozECWs2w76SGTtIVZIkaDuiyM=);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  align-items: center;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-primary);
+  color: var(--text);
 }
 
-/* Home Text Styling */
-.home-text h1 {
-  font-size: 2.7rem;
-  padding: 30px;
-  animation: slideInLeft 1.5s ease-in-out;
+/* Reset the global css from https://www.joshwcomeau.com/css/custom-css-reset/ */
+*::before, *::after {
+  box-sizing: border-box;
 }
 
-.home-text p {
-  font-size: 1rem;
-  margin: 0.4rem 0;
-  padding: 30px;
+* {
+  margin: 0;
 }
 
-.home-text span {
-  color: #b62f92;
-  padding-bottom: 50px;
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Search Bar Styles */
-.search-container {
-  position: relative;
-}
-
-  .search-container input[type="text"] {
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      width: 200px;
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  #root, #__next {
+    isolation: isolate;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+  }
+  
+  h3 {
+    font-size: 2.25rem;
+    font-weight: 700;
+  }
+  h4 {
+    font-size: 2rem;
+    font-weight: 600;
   }
 
-  .search-container button {
-      background-color: #004080;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      padding: 0.5rem;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+  h4 {
+    font-size: 2rem;
+    font-weight: 600;
   }
-
-      .search-container button:hover {
-          background-color: #e99ad0;
-      }
-
-/* About Section Styles */
-h2 {
-  padding: 20px;
-  font-family: monospace;
-}
-
-p {
-  padding: 10px;
-}
-
-/* Image Button Container Styles */
-.img-btn-container {
-  display: flex;
-  justify-content: center; /* Center items horizontally */
-  gap: 1rem; /* Spacing between images */
-  margin-top: 2rem;
-}
-
-.img-btn {
-  position: relative;
-  width: 200px; /* Set a fixed width for each image button */
-  height: 200px; /* Set a fixed height for each image button */
-  background-color: #ffffff; /* White background for image button */
-  border: 2px solid #1a237e; /* Navy blue border */
-  border-radius: 10px; /* Rounded corners for image button */
-  overflow: hidden; /* Hide overflowing content */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
-  transition: transform 0.3s ease; /* Add transition effect for hover */
-}
-
-  .img-btn img {
-      width: 100%;
-      height: auto;
-      transition: transform 0.3s ease; /* Add transition effect for image on hover */
+  
+  h5 {
+    font-size: 1.75rem;
+    font-weight: 600;
   }
-
-  .img-btn:hover {
-      transform: scale(1.1); /* Scale up image button on hover */
+  
+  h6 {
+    font-size: 1.5rem;
+    font-weight: 600;
   }
-
-  .img-btn .img-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: #ffffff; /* White text color */
-      font-size: 16px;
-      font-weight: bold;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+  
+  p {
+    font-size: 1.25rem;
+    font-weight: 400;
   }
-
-  .img-btn:hover .img-text {
-      opacity: 1;
+  
+  .page {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-
-/* Footer Styles */
-footer {
-  background-color: #004080;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  header {
-      padding: 10px 20px; /* Adjust padding for smaller screens */
-      flex-direction: column; /* Stack items vertically */
-      align-items: flex-start; /* Align items to the start */
+  
+  .page-container {
+    width: 75%;
+    height: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: var(--background-primary);
+    box-shadow: var(--box-shadow);
   }
-
-  .navbar {
-      flex-direction: column; /* Stack navbar items vertically */
-      gap: 0.5rem; /* Reduce gap between items */
-  }
-
-      .navbar a {
-          padding: 0.5rem; /* Adjust padding for smaller screens */
-      }
-
-  .home-text h1 {
-      font-size: 2rem; /* Adjust font size for smaller screens */
-      padding: 20px; /* Adjust padding for smaller screens */
-  }
-
-  .home-text p {
-      font-size: 0.9rem; /* Adjust font size for smaller screens */
-      padding: 20px; /* Adjust padding for smaller screens */
-  }
-
-  .search-container input[type="text"] {
-      width: 150px; /* Adjust width for smaller screens */
-  }
-
-  .img-btn-container {
-      flex-direction: column; /* Stack image buttons vertically */
-      gap: 1rem; /* Adjust gap between image buttons */
-  }
-
-  .img-btn {
-      width: 150px; /* Adjust width for smaller screens */
-      height: 150px; /* Adjust height for smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-      padding: 10px 10px; /* Further adjust padding for very small screens */
-  }
-
-  .navbar {
-      gap: 0.25rem; /* Further reduce gap between items */
-  }
-
-      .navbar a {
-          padding: 0.25rem 0.5rem; /* Further adjust padding for very small screens */
-      }
-
-  .home-text h1 {
-      font-size: 1.5rem; /* Further adjust font size for very small screens */
-      padding: 10px; /* Further adjust padding for very small screens */
-  }
-
-  .home-text p {
-      font-size: 0.8rem; /* Further adjust font size for very small screens */
-      padding: 10px; /* Further adjust padding for very small screens */
-  }
-
-  .search-container input[type="text"] {
-      width: 100px; /* Further adjust width for very small screens */
-  }
-
-  .img-btn {
-      width: 100px; /* Further adjust width for very small screens */
-      height: 100px; /* Further adjust height for very small screens */
-  }
-}
-
-
-
+  
+  
