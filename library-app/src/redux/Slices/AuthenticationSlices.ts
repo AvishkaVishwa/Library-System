@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction  } from '@reduxjs/toolkit';
-import { loginUserPayload, User } from '../../models/User';
+import { loginUserPayload, registerUserPayload, User } from '../../models/User';
 
 import axios from 'axios';
 
@@ -29,11 +29,30 @@ export const loginuser = createAsyncThunk(
     }
 );
 
+export const registerUser = createAsyncThunk(
+    'auth/register',
+    async (user: registerUserPayload, thunkAPI) => {
+        try {
+            const req = await axios.post('http://localhost:8000/auth/register', user);
+            return req.data.user;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+)
+
 export const AuthenticationSlice = createSlice({
     name : 'authentication',
     initialState,
     reducers: {
+        resetRegisterSuccess: (state) => {
+            state = {
+                ...state,
+                registerSuccess: false
+            }
+            return state;
 
+    },
     },
     extraReducers: (builder) => {
         //pending logic 
@@ -45,6 +64,17 @@ export const AuthenticationSlice = createSlice({
             }
             return state;
         });
+
+        builder.addCase(registerUser.pending, (state) => {
+            state = {
+                ...state,
+                loading: true,
+                error: false
+            }
+            return state;
+        });
+
+
         //resolved logic
         builder.addCase(loginuser.fulfilled, (state , action) => {
             state = {
@@ -54,7 +84,21 @@ export const AuthenticationSlice = createSlice({
                 loggedInUser: action.payload
             }
             return state;
-        })
+        });
+
+        builder.addCase(registerUser.fulfilled, (state, action) => {
+            state = {
+                ...state,
+                loading: false,
+                error: false,
+                registerSuccess: true,
+                loggedInUser: action.payload
+            }
+            return state;
+        });
+
+
+
         //rejected logic
         builder.addCase(loginuser.rejected, (state) => {
             state = {
@@ -64,10 +108,18 @@ export const AuthenticationSlice = createSlice({
             }
             return state;
         })
+
+        builder.addCase(registerUser.rejected, (state) => {
+            state = {
+                ...state,
+                loading: false,
+                error: true
+            }
+            return state;
+        });
     }
 });
 
-// eslint-disable-next-line no-empty-pattern
-export const {} = AuthenticationSlice.actions;
+export const {resetRegisterSuccess} = AuthenticationSlice.actions;
 
 export default AuthenticationSlice.reducer;

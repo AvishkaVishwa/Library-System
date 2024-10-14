@@ -1,20 +1,73 @@
-.login-form {
+/* Modal background */
+.modal-bg {
+  z-index: 999; /* Lower than the modal content */
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+  position: fixed; /* Covers the entire screen */
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  opacity: var(--fade-opacity, 0);
+  will-change: opacity;
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Modal container */
+.modal {
+  z-index: 1000; /* Higher than the background */
+  width: 90%; /* Adjust based on your design */
+  max-width: 500px; /* Max width for larger screens */
+  height: fit-content; /* Auto height */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 32px;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Add background gradient */
-  border-radius: 10px; /* Add border radius */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  position: fixed; /* Center the modal */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centering */
+  padding: 24px;
+  will-change: opacity, transform;
+  animation: scaleIn 0.5s forwards;
 }
 
-.login-form-error {
+/* Close button */
+.modal-exit {
+  align-self: flex-start;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.modal-exit:hover {
+  color: var(--primary);
+}
+
+/* Form inside modal */
+.login-form {
+  z-index: 1001; /* Ensure the form is above everything */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center content vertically */
+  width: 100%;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
   margin-bottom: 16px;
-  color: #CB4C4E;
-  font-weight: bold; /* Make error text bold */
+  font-family: 'Amasis Pro', sans-serif;
+  text-align: center; /* Center text */
 }
 
 .login-form-input-group {
@@ -26,84 +79,92 @@
   width: 100%;
   height: 2.5rem;
   font-size: 1.25rem;
-  padding: 5px;
-  border: 1px solid #ccc; /* Add border */
-  border-radius: 5px; /* Add border radius */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Add inner shadow */
-  transition: border-color 0.3s ease; /* Add transition for border color */
-}
-
-.login-form-input::placeholder {
-  color: var(--placeholder);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--text-secondary);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: 'Amasis Pro', sans-serif;
 }
 
 .login-form-input:focus {
-  outline: none;
-  border-color: #004080; /* Change border color on focus */
+  border-color: var(--primary);
+  box-shadow: 0 0 5px var(--primary);
 }
 
 .login-form-submit {
   width: 100%;
   height: 2.5rem;
   border: none;
-  background-color: var(--secondary);
-  border-radius: 5px;
+  background-color: var(--primary);
+  border-radius: 8px;
   font-size: 1.25rem;
-  margin-bottom: 16px;
   margin-top: 16px;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition for background color and transform */
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.3s;
+  font-family: 'Amasis Pro', sans-serif;
 }
 
 .login-form-submit:hover {
-  cursor: pointer;
-  background-color: #CB4C4E;
-  color: var(--primary);
-  box-shadow: var(--box-shadow);
-  border: 2px solid var(--primary);
-  transform: scale(1.05); /* Scale up on hover */
+  background-color: var(--secondary);
+  transform: scale(1.05);
 }
 
+/* Link to create account */
 .login-form-register {
   color: var(--primary);
   cursor: pointer;
-  margin-left: 4px;
-  font-weight: bold; /* Make register link bold */
+  margin-top: 16px;
+  transition: color 0.3s;
+  font-family: 'Amasis Pro', sans-serif;
+  text-align: center; /* Center text */
 }
 
 .login-form-register:hover {
   text-decoration: underline;
-  color: #CB4C4E; /* Change color on hover */
+  color: var(--secondary);
 }
 
-/* Responsive Styles */
+/* Animations */
+@keyframes fadeIn {
+  to {
+    --fade-opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    --scale-opacity: 1;
+    --scale-transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
-  .login-form {
-    padding: 16px; /* Adjust padding for smaller screens */
+  .modal {
+    width: 90%;
+    padding: 16px;
+  }
+
+  .login-form h2 {
+    font-size: 1.5rem;
   }
 
   .login-form-input {
-    height: 2rem; /* Adjust input height for smaller screens */
-    font-size: 1rem; /* Adjust font size for smaller screens */
+    font-size: 1rem;
+    height: 2rem;
   }
 
   .login-form-submit {
-    height: 2rem; /* Adjust button height for smaller screens */
-    font-size: 1rem; /* Adjust font size for smaller screens */
+    font-size: 1rem;
+    height: 2rem;
   }
 }
 
-@media (max-width: 480px) {
-  .login-form {
-    padding: 8px; /* Further adjust padding for very small screens */
-  }
-
-  .login-form-input {
-    height: 1.75rem; /* Further adjust input height for very small screens */
-    font-size: 0.875rem; /* Further adjust font size for very small screens */
-  }
-
-  .login-form-submit {
-    height: 1.75rem; /* Further adjust button height for very small screens */
-    font-size: 0.875rem; /* Further adjust font size for very small screens */
-  }
+/* Colorful theme */
+:root {
+  --primary: #ff6f61;
+  --secondary: #ffcc5c;
+  --text-primary: #333;
+  --text-secondary: #777;
 }

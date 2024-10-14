@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from '../../../../../redux/reduxStore';
 import { useEffect, useState } from 'react';
 import { setDisplayLogin } from '../../../../../redux/Slices/ModalSlice';
 import { LoginForm } from '../LoginForm';
+import { RegisterForm } from '../../RegisterForm/RegisterForm';
 
 export const LoginRegisterModal: React.FC = () => {
   const authState = useSelector((state: RootState) => state.authentication);
@@ -30,11 +31,11 @@ export const LoginRegisterModal: React.FC = () => {
                 localStorage.setItem('userId',authState.loggedInUser._id);
         }
     })
-    }, [authState.loggedInUser, closeModal]);
+    }, [authState.loggedInUser]);
 
   return (
     <Modal 
-      content={login ? <LoginForm toggleRegister={toggleLogin}/>:<></>} 
+      content={login ? <LoginForm toggleRegister={toggleLogin}/>: <RegisterForm toggleLogin={toggleLogin}/>} 
       toggleModal={closeModal}
     />
   )
